@@ -40,7 +40,7 @@ public class Group
     public string? StrapLine { get; set; }
 
     /// <summary>
-    ///     The name of this groups slack channel
+    ///     The name of this groups Slack channel
     /// </summary>
     [Column("slack_channel_name")]
     public string? SlackChannelName { get; set; }
