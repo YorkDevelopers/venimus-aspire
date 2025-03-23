@@ -1,0 +1,47 @@
+﻿@page "/groups"
+@attribute [StreamRendering(true)]
+@attribute [OutputCache(Duration = 5)]
+
+@inject VenimusApiClient VenimusApi
+
+<PageTitle>Groups</PageTitle>
+
+<h1>Groups</h1>
+
+<p>This component demonstrates showing data loaded from a backend API service.</p>
+
+@if (_groups == null)
+{
+    <p><em>Loading...</em></p>
+}
+else 
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th aria-label="Name of the group">Name</th>
+                <th aria-label="Description of the group">Description</th>
+                <th aria-label="Strap line for the group">Strap Line</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var grp in _groups)
+            {
+                <tr>
+                    <td>@grp.Name</td>
+                    <td>@grp.Description</td>
+                    <td>@grp.StrapLine</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private ListGroupsApiModel[]? _groups;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _groups = await VenimusApi.ListGroups();
+    }
+}
